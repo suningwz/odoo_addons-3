@@ -6,5 +6,5 @@
   <act_window id="action_shopify_connector" name="Shopify Stores" res_model="shopify_connector.store" view_mode="tree,form"/>
 
   <!--Menu Item to open shopify store list -->
-  <menuitem id="menu_shopify_store" name="Stores" parent="menu_connector" action="action_shopify_connector"/>
+  <menuitem id="menu_shopify_store" name="Stores" parent="connector_menu" action="action_shopify_connector"/>
 </odoo>
