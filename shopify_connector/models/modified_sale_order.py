@@ -9,7 +9,7 @@ class MyMixedInSaleOrder(models.Model):
 
     test_field = fields.Char("Jack's Field")
 
-    @api.onchange('delivery_count')
-    def _on_delivered_count_change(self):
+    @api.model
+    def write(self):
        _logger.debug('THink the delivery count changed!')
        _logger.info('FYI: This is happening')
