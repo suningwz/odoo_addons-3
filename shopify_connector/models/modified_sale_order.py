@@ -10,6 +10,8 @@ class MyMixedInSaleOrder(models.Model):
     test_field = fields.Char("Jack's Field")
 
     @api.model
-    def write(self):
+    def write(self, values):
        _logger.debug('THink the delivery count changed!')
        _logger.info('FYI: This is happening')
+       record = super(sale_order, self).create(values)
+       return record
