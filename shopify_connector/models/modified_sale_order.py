@@ -10,7 +10,12 @@ class MyMixedInSaleOrderLine(models.Model):
     #test_field = fields.Char("Jack's Field")
     def create(self, values):
         _logger.info('Called create')
-        record = super(MyMixedInSaleOrderLine, self).write(values)
+        record = super(MyMixedInSaleOrderLine, self).create(values)
+        return record
+
+    def flush(self, values):
+        _logger.info('Called flush')
+        record = super(MyMixedInSaleOrderLine, self).flush(values)
         return record
 
     def write(self, values):
