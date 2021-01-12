@@ -13,7 +13,7 @@ class MyMixedInSaleOrderLine(models.Model):
         record = super(MyMixedInSaleOrderLine, self).create(values)
         return record
 
-    def flush(self, fnames, records):
+    def flush(fnames, records):
         _logger.info('Called flush')
         _logger.info('Fnames: ' + str(fnames))
         record = super(MyMixedInSaleOrderLine, self).flush(values)
