@@ -9,7 +9,6 @@ class MyMixedInSaleOrder(models.Model):
 
     #test_field = fields.Char("Jack's Field")
 
-    @api.multi
     def write(self, values):
        _logger.info('FYI: This is happening')
        order_id = self['id']
