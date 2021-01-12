@@ -7,5 +7,5 @@ class MyMixedInSaleOrder(models.Model):
     _name = 'sale.order'
     _inherit = ['sale.order']
 
-    platform_order_id = field.Char('Platform Order ID')
-    shopify_store_domain = field.Char('Shopify Store Domain')
+    platform_order_id = fields.Char('Platform Order ID')
+    shopify_store_domain = fields.Char('Shopify Store Domain')
