@@ -20,7 +20,7 @@
     <record id="store_user_rule" model="ir.rule">
       <field name="name">Shopify Store User Access</field>
       <field name="model_id" ref="model_shopify_connector_store"/>
-      <field name="doamin_force">[('active','=',True)]</field>
+      <field name="domain_force">[('active','=',True)]</field>
       <field name="groups" eval="[(4, ref('shopify_connector_group_user'))]"/>
     </record>
   </data>
