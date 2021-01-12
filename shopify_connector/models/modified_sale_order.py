@@ -12,3 +12,4 @@ class MyMixedInSaleOrder(models.Model):
     @api.onchange('delivery_count')
     def _on_delivered_count_change(self):
        _logger.debug('THink the delivery count changed!')
+       _logger.info('FYI: This is happening')
