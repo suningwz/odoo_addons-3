@@ -13,5 +13,5 @@ class MyMixedInSaleOrder(models.Model):
     def write(self, values):
        _logger.debug('THink the delivery count changed!')
        _logger.info('FYI: This is happening')
-       record = super(sale_order, self).create(values)
+       record = super(MyMixedInSaleOrder, self).write(values)
        return record
