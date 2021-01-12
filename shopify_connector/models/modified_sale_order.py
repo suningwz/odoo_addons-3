@@ -11,7 +11,8 @@ class MyMixedInSaleOrderLine(models.Model):
 
     def write(self, values):
        _logger.info('FYI: This is happening')
-       order_id = self['order_id']
+       _logger.info('order id object type: ' + str(type(self['order_id'])))
+       order_id = self['order_id'].id
        order_lines = self.env['sale.order.line'].search([('order_id', '=', order_id)])
        total_quantity_to_deliver = 0
        total_quantity_delivered = 0
