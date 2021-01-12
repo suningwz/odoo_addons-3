@@ -1,4 +1,4 @@
 # -*- coding: utf-8 -*-
 
 from . import models
-from . import modified_sale_order
+from . import modified_stock_move_line
