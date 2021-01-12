@@ -3,15 +3,15 @@ from odoo import fields, models, api
 
 _logger = logging.getLogger(__name__)
 
-class MyMixedInSaleOrder(models.Model):
-    _name = 'sale.order'
-    _inherit = ['sale.order']
+class MyMixedInSaleOrderLine(models.Model):
+    _name = 'sale.order.line'
+    _inherit = ['sale.order.line']
 
     #test_field = fields.Char("Jack's Field")
 
     def write(self, values):
        _logger.info('FYI: This is happening')
-       order_id = self['id']
+       order_id = self['order_id']
        order_lines = self.env['sale.order.line'].search([('order_id', '=', order_id)])
        total_quantity_to_deliver = 0
        total_quantity_delivered = 0
@@ -23,5 +23,5 @@ class MyMixedInSaleOrder(models.Model):
        if total_quantity_delivered == total_quantity_to_deliver:
            #then we can call our api and say that this order is delivered
            _logger.info('the quantities are equal !')
-       record = super(MyMixedInSaleOrder, self).write(values)
+       record = super(MyMixedInSaleOrderLine, self).write(values)
        return record
