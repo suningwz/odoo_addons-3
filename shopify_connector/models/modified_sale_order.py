@@ -8,6 +8,10 @@ class MyMixedInSaleOrderLine(models.Model):
     _inherit = ['sale.order.line']
 
     #test_field = fields.Char("Jack's Field")
+    def create(self, values):
+        _logger.info('Called create')
+        record = super(MyMixedInSaleOrderLine, self).write(values)
+        return record
 
     def write(self, values):
        _logger.info('FYI: This is happening')
