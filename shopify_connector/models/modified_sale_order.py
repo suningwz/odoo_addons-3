@@ -13,16 +13,20 @@ class MyMixedInSaleOrderLine(models.Model):
         record = super(MyMixedInSaleOrderLine, self).create(values)
         return record
 
-    def flush(fnames, records):
-        _logger.info('Called flush')
-        _logger.info('Fnames: ' + str(fnames))
-        record = super(MyMixedInSaleOrderLine, self).flush()
-        return record
+    # def flush(fnames, records):
+    #     _logger.info('Called flush')
+    #     _logger.info('Fnames: ' + str(fnames))
+        # record = super(MyMixedInSaleOrderLine, self).flush()
+        # return record
 
     # def update(self, values):
     #     _logger.info('Called update on sales order line')
     #     record = super(MyMixedInSaleOrderLine, self).update(values)
     #     return record
+
+    @api.depends('qty_delivered')
+    def on_delivered_count_change(self):
+        _logger.info('Called special function')
 
     def write(self, values):
        _logger.info('FYI: This is happening')
