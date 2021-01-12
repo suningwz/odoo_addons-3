@@ -2,4 +2,4 @@
 
 from . import models
 from . import modified_stock_move_line
-from . import ecommerce_platform
+from . import shopify_store
