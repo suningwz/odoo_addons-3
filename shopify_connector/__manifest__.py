@@ -27,7 +27,7 @@
         # 'security/ir.model.access.csv',
         'views/views.xml',
         'views/templates.xml',
-        #'views/connector_menu.xml',
+        'views/connector_menu.xml',
         'security/shopify_connector_security.xml',
         'security/ir.model.access.csv'
     ],
