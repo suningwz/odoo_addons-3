@@ -7,3 +7,6 @@ class ShopifyStore(models.Model):
     api_key = fields.Char('API Key', required=True)
     password = fields.Char('Password', required=True)
     shop_name = fields.Char('Shop Name/Domain', required=True)
+
+    def change_order_state(new_state, order_id):
+        print("called change order status")

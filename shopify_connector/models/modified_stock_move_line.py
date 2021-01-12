@@ -7,27 +7,6 @@ class MyMixedInStockMoveLine(models.Model):
     _name = 'stock.move.line'
     _inherit = ['stock.move.line']
 
-    #test_field = fields.Char("Jack's Field")
-    # def create(self, values):
-    #     _logger.info('Called create')
-    #     record = super(MyMixedInSaleOrderLine, self).create(values)
-    #     return record
-
-    # def flush(fnames, records):
-    #     _logger.info('Called flush')
-    #     _logger.info('Fnames: ' + str(fnames))
-        # record = super(MyMixedInSaleOrderLine, self).flush()
-        # return record
-
-    # def update(self, values):
-    #     _logger.info('Called update on sales order line')
-    #     record = super(MyMixedInSaleOrderLine, self).update(values)
-    #     return record
-
-    # @api.depends('qty_delivered')
-    # def on_delivered_count_change(self):
-    #     _logger.info('Called special function')
-
     def write(self, values):
        _logger.info('FYI: This is happening')
        if self['product_uom_qty'] == self['qty_done']:
