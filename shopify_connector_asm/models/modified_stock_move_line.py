@@ -7,8 +7,6 @@ class MyMixedInStockMoveLine(models.Model):
     _name = 'stock.move.line'
     _inherit = ['stock.move.line']
 
-    platform_order_id = fields.Char('Platform Order ID')
-    
     def write(self, values):
        _logger.info('FYI: This is happening')
        if self['product_uom_qty'] == self['qty_done']:
