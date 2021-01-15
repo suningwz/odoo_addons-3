@@ -22,10 +22,37 @@ class MyMixedInStockMoveLine(models.Model):
                sales_order_line = self.env['sale.order.line'].search([['id', '=', stock_move_parent['sale_line_id'].id]])
                _logger.info('sale line id: ' + str(sales_order_line['id']))
                sales_order = self.env['sale.order'].search([['id', '=', sales_order_line['order_id'].id]])
-               #once we have that id, we can get the order and its associated store Domain, and shopify order domain
                _logger.info('sale order id: ' + str(sales_order['id']))
-               #once we have the store domain we can hit up shopify's order api with those keys
+               #once we have that id, we can get the order and its associated store Domain, and shopify order id
+               shopify_store_domain = sales_order['shopify_store_domain']
+               shopify_order_id = sales_order['platform_order_id']
+               #now we want to look up our shopify stores against this domain
+               shopify_store = self.env['shopify_connector.store'].search([['shop_name', '=', shopify_store_domain]])
+               api_key = shopify_store['api_key']
+               password = shopify_store['password']
 
-               #and update the order status to delivered.
+               shop_url = "https://#{api_key}:#{password}@#{shopify_store_domain}.myshopify.com" + "/admin/api/2020-10/orders/#{shopify_order_id}.json"
+
+               order_hash => {
+                "order"=> {
+                 "id" => shopify_order_id,
+                 "fulfillment_status" => "fulfilled"
+                }
+               }
+
+               #once we have the store domain we can hit up shopify's order api with those keys
+               uri = URI(shop_url)
+               http = Net::HTTP.new(uri.host, uri.port)
+               http.use_ssl = true
+               request = Net::HTTP::Put.new(uri)
+               request.body = order_hash.to_json
+               request['X-Shopify-Access-Token'] = pasword
+               request['Content-Type'] = "application/json"
+
+               response = http.request(request)
+               puts response.body
+
+               #use this for validation of delivery
+               #response_hash = JSON.parse(response.body)
            record = super(MyMixedInStockMoveLine, self).write(values)
            return record
