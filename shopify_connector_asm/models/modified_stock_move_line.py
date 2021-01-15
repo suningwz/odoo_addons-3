@@ -34,15 +34,15 @@ class MyMixedInStockMoveLine(models.Model):
                password = shopify_store['password']
                _logger.info('api key: ' + str(api_key))
                _logger.info('password: ' + str(password))
-               shop_url = "https://" + str(api_key) + ":" + str(password) +"@" + str(shopify_store_domain) + ".myshopify.com/admin/api/2020-10/orders/" + str(shopify_order_id) + ".json"
+               shop_url = "https://" + str(api_key) + ":" + str(password) +"@" + str(shopify_store_domain) + ".myshopify.com/admin/api/2020-10/orders/" + str(shopify_order_id) + "/fulfillments.json"
 
                _logger.info("shopify_order_id: " + str(shopify_order_id))
-               order_json = {
-                "order": {
-                 "id": shopify_order_id,
-                 "fulfillment_status": "fulfilled"
+               fulfillment_json = {
+                  "fulfillment": {
+                    "shipment_status": "delivered"
+                    "notify_customer": true
+                  }
                 }
-               }
 
                #once we have the store domain we can hit up shopify's order api with those keys
                headers = {
@@ -50,7 +50,7 @@ class MyMixedInStockMoveLine(models.Model):
                 'Content-Type': "application/json"
                }
 
-               response = requests.put(shop_url, json=order_json, headers=headers)
+               response = requests.post(shop_url, json=fulfillment_json, headers=headers)
                _logger.info(response.json())
            record = super(MyMixedInStockMoveLine, self).write(values)
            return record
