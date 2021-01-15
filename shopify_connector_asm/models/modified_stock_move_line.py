@@ -40,7 +40,7 @@ class MyMixedInStockMoveLine(models.Model):
                fulfillment_json = {
                   "fulfillment": {
                     "shipment_status": "delivered",
-                    "notify_customer": true
+                    "notify_customer": True
                   }
                 }
 
