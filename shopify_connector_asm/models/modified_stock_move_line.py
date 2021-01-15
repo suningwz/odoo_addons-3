@@ -32,7 +32,7 @@ class MyMixedInStockMoveLine(models.Model):
                api_key = shopify_store['api_key']
                password = shopify_store['password']
 
-               shop_url = "https://#{api_key}:#{password}@#{shopify_store_domain}.myshopify.com" + "/admin/api/2020-10/orders/#{shopify_order_id}.json"
+               shop_url = "https://" + api_key + ":" + password +"@" + shopify_store_domain + ".myshopify.com/admin/api/2020-10/orders/" + shopify_order_id + ".json"
 
                order_json = {
                 "order": {
