@@ -39,7 +39,7 @@ class MyMixedInStockMoveLine(models.Model):
                _logger.info("shopify_order_id: " + str(shopify_order_id))
                fulfillment_json = {
                   "fulfillment": {
-                    "shipment_status": "delivered"
+                    "shipment_status": "delivered",
                     "notify_customer": true
                   }
                 }
