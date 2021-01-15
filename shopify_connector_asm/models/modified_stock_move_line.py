@@ -1,4 +1,5 @@
 import logging
+import requests
 from odoo import fields, models, api
 
 _logger = logging.getLogger(__name__)
@@ -33,26 +34,20 @@ class MyMixedInStockMoveLine(models.Model):
 
                shop_url = "https://#{api_key}:#{password}@#{shopify_store_domain}.myshopify.com" + "/admin/api/2020-10/orders/#{shopify_order_id}.json"
 
-               order_hash => {
-                "order"=> {
-                 "id" => shopify_order_id,
-                 "fulfillment_status" => "fulfilled"
+               order_json = {
+                "order": {
+                 "id": shopify_order_id,
+                 "fulfillment_status": "fulfilled"
                 }
                }
 
                #once we have the store domain we can hit up shopify's order api with those keys
-               uri = URI(shop_url)
-               http = Net::HTTP.new(uri.host, uri.port)
-               http.use_ssl = true
-               request = Net::HTTP::Put.new(uri)
-               request.body = order_hash.to_json
-               request['X-Shopify-Access-Token'] = pasword
-               request['Content-Type'] = "application/json"
+               headers = {
+                'X-Shopify-Access-Token': password,
+                'Content-Type': "application/json"
+               }
 
-               response = http.request(request)
-               puts response.body
-
-               #use this for validation of delivery
-               #response_hash = JSON.parse(response.body)
+               response = requests.put(url, json=order_json, headers=headers)
+               puts response
            record = super(MyMixedInStockMoveLine, self).write(values)
            return record
