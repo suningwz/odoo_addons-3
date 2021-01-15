@@ -37,9 +37,11 @@ class MyMixedInStockMoveLine(models.Model):
                shop_url = "https://" + str(api_key) + ":" + str(password) +"@" + str(shopify_store_domain) + ".myshopify.com/admin/api/2020-10/orders/" + str(shopify_order_id) + "/fulfillments.json"
 
                _logger.info("shopify_order_id: " + str(shopify_order_id))
+
+
                fulfillment_json = {
                   "fulfillment": {
-                    "location_id": 1234567,
+                    "location_id": 50861768858,
                     "shipment_status": "delivered",
                     "notify_customer": True
                   }
