@@ -19,11 +19,11 @@ class MyMixedInStockMoveLine(models.Model):
                #now we want to get the sale.order id of this stock move
                stock_move_parent = self.env['stock.move'].search([['id', '=', rec['move_id'].id]])
                _logger.info('stock move parent: ' + str(stock_move_parent['id']))
-               sales_order_line = self.env['sale.order.line'].search([['id', '=', stock_move_parent['sale_line_id']]])
-               _logger.info('sale line parent: ' + str(sales_order_line['id']))
-               sales_order = self.env['sale.order'].search([['id', '=', sales_order_line['order_id']]])
+               sales_order_line = self.env['sale.order.line'].search([['id', '=', stock_move_parent['sale_line_id'].id]])
+               _logger.info('sale line id: ' + str(sales_order_line['id']))
+               sales_order = self.env['sale.order'].search([['id', '=', sales_order_line['order_id'].id]])
                #once we have that id, we can get the order and its associated store Domain, and shopify order domain
-
+               _logger.info('sale order id: ' + str(sales_order['id']))
                #once we have the store domain we can hit up shopify's order api with those keys
 
                #and update the order status to delivered.
