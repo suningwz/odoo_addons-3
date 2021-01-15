@@ -13,7 +13,8 @@ class MyMixedInStockMoveLine(models.Model):
            #then we can call our api and say that this order is delivered
            _logger.info('the quantities are equal !')
            #now we want to get the sale.order id of this stock move
-
+           stock_move_parent = self.env['stock.move'].search([['move_id', '=', move_id]])
+           _logger.info('stock move parent: ' + stock_move_parent)
            #once we have that id, we can get the order and its associated store Domain, and shopify order domain
 
            #once we have the store domain we can hit up shopify's order api with those keys
