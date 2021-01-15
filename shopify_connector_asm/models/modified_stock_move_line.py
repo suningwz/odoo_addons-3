@@ -47,7 +47,7 @@ class MyMixedInStockMoveLine(models.Model):
                 'Content-Type': "application/json"
                }
 
-               response = requests.put(url, json=order_json, headers=headers)
+               response = requests.put(shop_url, json=order_json, headers=headers)
                _logger.info(response)
            record = super(MyMixedInStockMoveLine, self).write(values)
            return record
