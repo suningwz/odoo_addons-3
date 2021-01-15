@@ -26,6 +26,7 @@ class MyMixedInStockMoveLine(models.Model):
                _logger.info('sale order id: ' + str(sales_order['id']))
                #once we have that id, we can get the order and its associated store Domain, and shopify order id
                shopify_store_domain = sales_order['shopify_store_domain']
+               _logger.info(shopify_store_domain)
                shopify_order_id = sales_order['platform_order_id']
                #now we want to look up our shopify stores against this domain
                shopify_store = self.env['shopify_connector.store'].search([['shop_name', '=', shopify_store_domain]])
