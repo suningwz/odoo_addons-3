@@ -34,18 +34,15 @@ class MyMixedInStockMoveLine(models.Model):
                password = shopify_store['password']
                _logger.info('api key: ' + str(api_key))
                _logger.info('password: ' + str(password))
-               shop_url = "https://" + str(api_key) + ":" + str(password) +"@" + str(shopify_store_domain) + ".myshopify.com/admin/api/2020-10/orders/" + str(shopify_order_id) + "/fulfillments.json"
+               fulfillment_shop_url = "https://" + str(api_key) + ":" + str(password) +"@" + str(shopify_store_domain) + ".myshopify.com/admin/api/2020-10/orders/" + str(shopify_order_id) + "/fulfillments.json"
 
                _logger.info("shopify_order_id: " + str(shopify_order_id))
 
-
-               fulfillment_json = {
-                  "fulfillment": {
-                    "location_id": 50861768858,
-                    "shipment_status": "delivered",
-                    "notify_customer": True
-                  }
-                }
+               #fulfillment locaion id hardcoded here
+               #for now we're going to change this to the first location the store offers
+               #there should always be at least one
+               #it bears mentioning this location could totally be wrong
+               locations_shop_url = "https://" + str(api_key) + ":" + str(password) +"@" + str(shopify_store_domain) + ".myshopify.com/admin/api/2020-10/locations.json"
 
                #once we have the store domain we can hit up shopify's order api with those keys
                headers = {
@@ -53,7 +50,19 @@ class MyMixedInStockMoveLine(models.Model):
                 'Content-Type': "application/json"
                }
 
-               response = requests.post(shop_url, json=fulfillment_json, headers=headers)
+               locations_response = requests.get(locations_shop_url, headers=headers)
+
+               _logger.info(location_response.json())
+
+               #this will need to change
+               fulfillment_json = {
+                  "fulfillment": {
+                    "location_id": 50861768858,
+                    "shipment_status": "delivered",
+                    "notify_customer": True
+                  }
+                }
+               response = requests.post(fulfillment_shop_url, json=fulfillment_json, headers=headers)
                _logger.info(response.json())
            record = super(MyMixedInStockMoveLine, self).write(values)
            return record
