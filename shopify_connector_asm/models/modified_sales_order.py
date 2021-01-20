@@ -19,6 +19,7 @@ class MyMixedInSaleOrder(models.Model):
                shopify_order_id = rec['platform_order_id']
                ### CANCELLED CASE ###
                if rec['state'] == 'cancel':
+                   print('thinks we should cancel the order')
                    shopify_store = self.env['shopify_connector.store'].search([['shop_name', '=', shopify_store_domain]])
                    api_key = shopify_store['api_key']
                    password = shopify_store['password']
@@ -36,5 +37,6 @@ class MyMixedInSaleOrder(models.Model):
                    }
 
                    response = requests.post(order_shop_url, json=cancel_json, headers=headers)
+                   print(response.json())
            record = super(MyMixedInSaleOrder, self).write(values)
            return record
