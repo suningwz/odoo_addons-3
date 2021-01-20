@@ -52,7 +52,7 @@ class MyMixedInStockMoveLine(models.Model):
 
                locations_response = requests.get(locations_shop_url, headers=headers)
 
-               _logger.info(location_response.json())
+               _logger.info(locations_response.json())
 
                #this will need to change
                fulfillment_json = {
