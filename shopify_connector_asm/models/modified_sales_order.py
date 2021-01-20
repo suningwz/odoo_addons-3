@@ -36,5 +36,5 @@ class MyMixedInSaleOrder(models.Model):
                    }
 
                    response = requests.post(order_shop_url, json=cancel_json, headers=headers)
-           record = super(MyMixedInStockMoveLine, self).write(values)
+           record = super(MyMixedInSaleOrder, self).write(values)
            return record
