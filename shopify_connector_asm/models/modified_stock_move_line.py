@@ -52,12 +52,15 @@ class MyMixedInStockMoveLine(models.Model):
 
                locations_response = requests.get(locations_shop_url, headers=headers)
 
-               _logger.info(locations_response.json())
+               first_location_id = locations_response.json()['locations'][0]['id']
+               _logger.info()
+
+
 
                #this will need to change
                fulfillment_json = {
                   "fulfillment": {
-                    "location_id": 50861768858,
+                    "location_id": first_location_id,
                     "shipment_status": "delivered",
                     "notify_customer": True
                   }
