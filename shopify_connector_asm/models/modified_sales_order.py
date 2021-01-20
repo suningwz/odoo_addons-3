@@ -18,6 +18,7 @@ class MyMixedInSaleOrder(models.Model):
                shopify_store_domain = rec['shopify_store_domain']
                shopify_order_id = rec['platform_order_id']
                ### CANCELLED CASE ###
+               print(rec['state'])
                if rec['state'] == 'cancel':
                    print('thinks we should cancel the order')
                    shopify_store = self.env['shopify_connector.store'].search([['shop_name', '=', shopify_store_domain]])
